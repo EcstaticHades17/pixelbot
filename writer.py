@@ -2,21 +2,47 @@
 import random
 import PIL
 from time import sleep
+import os
 def write(img, handler, sx, sy, ex, ey):
     try:
-        module = "import "+handler+" as handler"
-        exec(module)
-    except Exception:
-        print("\033[0;32;40m")
-        responses = [
+        try:
+            module = "import "+handler+" as handler"
+            exec(module)
+        except Exception:
+            print("\033[0;32;40m")
+            responses = [
         "Error: No Communucation interface found",
         "Who ate my Communication Interface?"
         "https://www.google.com/search?q=Communication+Interface",
         "huh?"
-        ]
-        print(random.choice(responses))
-        print("\033[0;37;40m")
-        raise Exception("The program was not given a interface")
+            ]
+            print(random.choice(responses))
+            print("\033[0;37;40m")
+            raise Exception("The program was not given a interface")
+    except Exception:
+        if handler == "":
+            raise Exception("Empty string")
+        elif handler[0] == "/":
+            handler = handler.replace("/", "", 1)
+            try:
+                module = "import "+handler+" as handler"
+                exec(module)
+            except Exception:
+                print("\033[0;32;40m")
+                responses = [
+            "Error: No Communucation interface found",
+            "Who ate my Communication Interface?"
+            "https://www.google.com/search?q=Communication+Interface",
+            "huh?"
+                ]
+                print(random.choice(responses))
+                print("\033[0;37;40m")
+                raise Exception("The program was not given a interface")
+        elif os.path.isfile(path):
+            raise Exception("The file given is not a Python Executable")
+        else:
+            raise Exception("The Program was unable to import the Handler")
+
     else:
         sizex, sizey = img.size
         if (sx - ex) == sizex and (sy - ey) == sizey:
@@ -37,6 +63,8 @@ def write(img, handler, sx, sy, ex, ey):
                 handler.send(tx, ty, pixel_values[width*y+x])
                 tx += 1
             ty += 1
+
+
 def gethandler():
     print("\033[0;32;40m")
     print("The Program has currently no built-in Interface to communicate with a Pixel-Art Service.")
@@ -47,4 +75,6 @@ def getcanvas():
     sy = input("\033[0;35;40m Please enter the y-coordinate of the top left corner in the picture canvas: \036[0;32;40m")
     ex = input("\033[0;35;40m Please enter the x-coordinate of the bottom right corner in the picture canvas: \036[0;32;40m")
     ey = input("\033[0;35;40m Please enter the y-coordinate of the bottom right corner in the picture canvas: \036[0;32;40m")
+    if sx == "" or sy == "" or ex == "" or ey == "":
+        print("Error: Yo")
     return sx, sy, ex, ey

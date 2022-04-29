@@ -5,7 +5,8 @@ import random
 def imageprompt(path=False):
     if path == False:
         print("\033[0;35;40m")
-        path = input("please provide the path to the image here: \036[0;32;40m")
+        print("please provide the path to the image HERE:  \033[0;37;40m")
+        path = input()
         print("\033[0;37;40m")
     else:
         pass
