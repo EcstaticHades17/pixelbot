@@ -1,10 +1,13 @@
 #__init__.py
-import canvaswriter
+import writer
 import getimage
 from helpmessagehandler import *
 import sys
 
-helpmsg(sys.argv)
+if len(sys.argv) == 2 or len(sys.argv) > 2:
+    helpmsg(sys.argv)
+else:
+    pass
 
 
 if len(sys.argv) == 2:
@@ -18,6 +21,8 @@ elif len(sys.argv) > 2:
     print("\033[0;37;40m")
     inpath = sys.argv[1]
     image, size = getimage.imageprompt(inpath)
+    writer.write(image)
 else:
     image, size = getimage.imageprompt()
-    print(size)
+    startx, starty, endx, endy = writer.getcanvas()
+    writer.write(image, writer.gethandler(), startx, starty, endx, endy)
