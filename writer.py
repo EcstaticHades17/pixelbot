@@ -60,7 +60,8 @@ def write(img, handler, sx, sy, ex, ey):
         for y in range(sy, ey):
             for x in range(sx, ex):
                 sleep(handler.getcountdown())
-                handler.send(tx, ty, pixel_values[width*y+x])
+                r, g, b, = pixel_values[width*y+x]
+                handler.send(tx, ty, r, g, b)
                 tx += 1
             ty += 1
 
