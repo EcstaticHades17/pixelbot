@@ -56,12 +56,21 @@ def write(img, handler, sx, sy, ex, ey):
         handler.connect()
         tx = sx
         ty = sy
-
+        maintenance = {}
         for y in range(sy, ey):
             for x in range(sx, ex):
                 sleep(handler.getcountdown())
                 r, g, b, = pixel_values[width*y+x]
                 handler.send(tx, ty, r, g, b)
+                num = x*y
+                maintenance[num] = (tx, ty, r, g, b)
+                for pixel in range(num):
+                    x2, y2, r2, g2, b2 = maintenance[pixel]
+                    if r2 == handler.get(x2, y2)[0] and g2 == handler.get(x2, y2)[1] and b2 == handler.get(x2, y2)[2]:
+                        pass
+                    else:
+                        sleep(handler.getcountdown())
+                        handler.send(r2, g2, b2)
                 tx += 1
             ty += 1
 
