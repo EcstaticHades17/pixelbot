@@ -35,12 +35,12 @@ def write(img, handlerpath, sx, sy, ex, ey, size, UI, silence=False):
                 pass
             ex = sx + sizex
             ey = sy + sizey
-            print(sx)
-            print(sy)
-            print(ex)
-            print(ey)
-            print(sizex)
-            print(sizey)
+            #print(sx)
+            #print(sy)
+            #print(ex)
+            #print(ey)
+            #print(sizex)
+            #print(sizey)
         if (ex - sx) == sizex and (ey - sy) == sizey:
             pass
         else:

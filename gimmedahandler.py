@@ -97,21 +97,27 @@ def handler(handler, silence=False):
         handler = handler[0].strip()
         return handler
     elif "/" in handler:
-        print(handler)
+        #print(handler)
         handler = handler.split("/")
         handler.reverse()
-        path = handler
-        path.remove(handler[0])
+        #print(handler)
+        path = handler[0:]
+        #print(path)
+        path.remove(path[0])
+        #print(path)
         path.reverse()
+        #print(path)
         sys.path.insert(1, toolset.combine(path, "/"))
         file = handler
         #print(file)
-        file = file[0].strip()
-        file = handler.split(".")
+        file = file[0]
+        #print(file)
+        file = file.split(".")
         file.reverse()
-        file.remove(handler[0])
+        file.remove(file[0])
         file.reverse()
-        file = toolset.combine(handler, ".")
+        #print(file)
+        file = toolset.combine(file, ".")
         #print(file, flush=True)
         return file
     else:

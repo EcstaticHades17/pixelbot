@@ -1143,12 +1143,12 @@ colors = OrderedDict(sorted(colors.items(), key=lambda t: t[0]))
 
 ##color_dict.py end
 def combine(list, separator) -> str:
-    str = ""
+    out = ""
     if len(list) == 1:
-        str = list[0]
-        return str
+        out = list[0]
+        return out
     for i in list:
-        str += str(i) + separator
-    return str
+        out += str(i) + separator
+    return out
 def defaultcol():
     print("\033[0;37;40m")
