@@ -1,10 +1,13 @@
+#!/usr/bin/env python3
+
 #eh.py
 # a example for a header. Useless and only for testing
 def connect():
     print("")
 
 def getcountdown():
-    return input("countdown in seconds?")
+    #return int(input("countdown in seconds?"))
+    return 0.125
 
 def send(x, y, r, g, b):
     print(x)
@@ -12,5 +15,6 @@ def send(x, y, r, g, b):
     print(r)
     print(g)
     print(b)
-def get(x, y):
-    return (0, 0, 0)
+
+def check(x, y, r, g, b):
+    return True

@@ -1,4 +1,3 @@
-"# pixelbot"
-This project is not even nearly done.
-Its a bot for things like r/place to automatically place pixels on a canvas / area defined by the user.
-it can be used command-line-based but also is able to operate interactively.
+# pixelbot
+This project is nearly done.
+Its a command-line-based bot for things like r/place that is able to automatically place pixels on a canvas / area defined by the user.
