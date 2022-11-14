@@ -19,16 +19,19 @@ success = toolset.colors["olivedrab1"]
 wtf = toolset.colors["teal"]
 
 def write(img, handlerpath, sx, sy, ex, ey, size, UI, silence=False):
-    try:
+    try: #import the handler
         handlerfile = gimmedahandler.handler(handlerpath, UI)
         actor = __import__(handlerfile)
         status.setcol()
         print("Handler imported successfully")
-
+    except ModuleNotFoundError: #the rare case that something went wrong
+        wtf.setcolor()
+        print("something is wrong with the given handler path but idk")
+        toolset.defaultcol()
 
     finally:
         sizex, sizey = size
-        if ex == None or ex == "" or ey == None or ey == "":
+        if ex == None or ex == "" or ey == None or ey == "": #check wether or not the end of the canvas was given and generate them if needed
             if not silence:
                 print("Generating bottom right corner of the canvas...")
             else:
@@ -41,7 +44,7 @@ def write(img, handlerpath, sx, sy, ex, ey, size, UI, silence=False):
             #print(ey)
             #print(sizex)
             #print(sizey)
-        if (ex - sx) == sizex and (ey - sy) == sizey:
+        if (ex - sx) == sizex and (ey - sy) == sizey: #check if the size of the given canvas matches the size of the picture
             pass
         else:
             error_title.setcol()
@@ -54,9 +57,11 @@ def write(img, handlerpath, sx, sy, ex, ey, size, UI, silence=False):
 
         width, height = size
         pixel_values = img.getdata()
-        status.setcol()
-        print("Initializing connection...")
+        if not silece:
+            status.setcol()
+            print("Initializing connection...")
         actor.connect()
+        ##preparations
         tx = sx
         ty = sy
         rx = 0
@@ -64,7 +69,7 @@ def write(img, handlerpath, sx, sy, ex, ey, size, UI, silence=False):
         #print(ey)
         num = 1
         maintenance = {}
-        if silence:
+        if silence: #write the picture in silent mode
 
             for y in range(sy, ey):
                 for x in range(sx, ex):
@@ -93,10 +98,9 @@ def write(img, handlerpath, sx, sy, ex, ey, size, UI, silence=False):
             success.setcol()
             print("DONE")
             toolset.defaultcol()
-            exit()
 
 
-        else:
+        else: #write the picture in loud? mode
 
             print("printing...")
             for y in range(sy, ey):
@@ -144,28 +148,27 @@ def write(img, handlerpath, sx, sy, ex, ey, size, UI, silence=False):
             success.setcol()
             print("DONE")
             toolset.defaultcol()
-            exit()
 
-def getcanvas(UI, sx, sy, ex, ey):
+def getcanvas(UI, sx, sy, ex, ey): #getting the canvas info
     if UI:
         await_input.setcol()
-        print("Please enter the x-coordinate of the top left corner in the picture canvas:", end=" "); inputt.setcol()
+        print("Please enter the x-coordinate of the top left corner in the picture canvas:", end=" "); inputt.setcol() #user input
         sx = input()
         print()
         await_input.setcol()
-        print("Please enter the y-coordinate of the top left corner in the picture canvas:", end=" "); inputt.setcol()
+        print("Please enter the y-coordinate of the top left corner in the picture canvas:", end=" "); inputt.setcol() #user input
         sy = input()
         print()
         await_input.setcol()
-        print("Please enter the x-coordinate of the bottom right corner in the picture canvas:", end=" "); inputt.setcol()
+        print("Please enter the x-coordinate of the bottom right corner in the picture canvas:", end=" "); inputt.setcol() #user input
         ex = input()
         print()
         await_input.setcol()
-        print("Please enter the y-coordinate of the bottom right corner in the picture canvas:", end=" "); inputt.setcol()
+        print("Please enter the y-coordinate of the bottom right corner in the picture canvas:", end=" "); inputt.setcol() #user input
         ey = input()
         toolset.defaultcol()
         pass
-        try:
+        try: #some checks
             sx = int(sx)
             sy = int(sy)
             if not ex == "" and not ey == "":
@@ -188,10 +191,10 @@ def getcanvas(UI, sx, sy, ex, ey):
         return sx, sy, ex, ey
     elif not sx == None and not sy == None:
         return sx, sy, ex, ey
-    else:
+    else: #raising an error
         error_title.setcol()
         print("     Error:")
         error_desc.setcol()
-        print("Incomplete or missing Arguments: startx and/or starty and/or endx and/or endy")
+        print("Incomplete or missing Arguments: startx and/or starty")
         toolset.defaultcol()
         exit(0)

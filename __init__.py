@@ -8,13 +8,15 @@ if platform.system() == "Windows": import ctypes; kernel32 = ctypes.WinDLL('kern
 else: pass;
 try:
     import _main_
-except KeyboardInterrupt:
+except KeyboardInterrupt:       #check for keyboard interupts (ctrl + C)
     error_title.setcol()
     print("Error: Keyboard Interrupt")
     defaultcol()
+    if os.isfile("./nc.temp"):
+        os.remove("./nc.temp")
 
     exit()
-except ModuleNotFoundError as err:
+except ModuleNotFoundError:     #make shure everything is existing
     print("yo... there is stuff missing... you didn't download the entire repo, did you?")
     raise
     exit()

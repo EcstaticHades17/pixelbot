@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import os
+
 #toolset.py
 
 ##color_dict.py with edits
@@ -10,25 +12,31 @@ elements formatted: colors[colorname] = CONSTANT"""
 from collections import namedtuple, OrderedDict
 Color = namedtuple('RGB','red, green, blue, r, g, b')
 colors = {} #dict of colors
-class RGB(object):
-    def __init__(self, red, blue, green):
+class RGB(object): #creating a rgb-class
+    def __init__(self, red, blue, green): #preparing the rgb int values and their str equivalents
         self.red = red
         self.blue = blue
         self.green = green
         self.r = str(self.red)
         self.g = str(self.green)
         self.b = str(self.blue)
-    def hex_format(self):
+    def hex_format(self): #some shit that is left unused but probably helpful to others
         """Returns color in hex format"""
         return '#{:02X}{:02X}{:02X}'.format(self.red,self.green,self.blue)
-    def setcol(self, newline=False):
-        print("\x1b[38;2;" + self.r + ";" + self.b + ";" + self.g + "m", end="")
-        if newline:
-            print()
-    def setbg(self, newline=False):
-        print("\x1b[48;2;" + self.r + ";" + self.b + ";" + self.g + "m", end="")
-        if newline:
-            print()
+    def setcol(self, newline=False): #setting the command line output color
+        if not os.path.isfile("./nc.temp"):
+            print("\x1b[38;2;" + self.r + ";" + self.b + ";" + self.g + "m", end="")
+            if newline:
+                print()
+        else:
+            pass
+    def setbg(self, newline=False): #setting the commandline background color (also unused)
+        if not os.path.isfile("./nc.temp"):
+            print("\x1b[48;2;" + self.r + ";" + self.b + ";" + self.g + "m", end="")
+            if newline:
+                print()
+        else:
+            pass
 #Color Contants
 ALICEBLUE = RGB(240, 248, 255)
 ANTIQUEWHITE = RGB(250, 235, 215)
@@ -1139,10 +1147,10 @@ colors['yellow1'] = YELLOW1
 colors['yellow2'] = YELLOW2
 colors['yellow3'] = YELLOW3
 colors['yellow4'] = YELLOW4
-colors = OrderedDict(sorted(colors.items(), key=lambda t: t[0]))
+colors = OrderedDict(sorted(colors.items(), key=lambda t: t[0])) #putting all the defined colors into one giant dictionary object
 
 ##color_dict.py end
-def combine(list, separator) -> str:
+def combine(list, separator) -> str: #combine a list into a string (str for lists)
     out = ""
     if len(list) == 1:
         out = list[0]
@@ -1150,5 +1158,8 @@ def combine(list, separator) -> str:
     for i in list:
         out += str(i) + separator
     return out
-def defaultcol():
-    print("\033[0;37;40m")
+def defaultcol(): #setting the text to white and bold
+    if not os.path.isfile("./nc.temp"):
+        print("\033[0;37;40m")
+    else:
+        pass

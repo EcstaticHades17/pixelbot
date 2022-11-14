@@ -21,7 +21,7 @@ def gethandler(handler, UI=False):
         status.setcol()
         print("The Program has currently no built-in Interface to communicate with a Pixel-Art Service.")
         await_input.setcol()
-        print("Please provide the path to a exernal Communication Interface HERE:", end="   ")
+        print("Please provide the path to a exernal Communication Interface HERE:", end="   ") #geting user input
         inputt.setcol()
         handler = input()
         #print(handler)
@@ -33,23 +33,23 @@ def gethandler(handler, UI=False):
 def handler(handler, silence=False):
     #print(handler)
     check = handler[::-1]
-    if handler == "":
-        responses = [
+    if handler == "": #invalid input
+        responses = [   #random message
     "Error: No Communication interface found",
     "Who ate my Communication Interface?",
     "https://www.google.com/search?q=Communication+Interface",
     "huh?",
     "..."
         ]
-        if not silence:
+        if not silence:  #checking if in silent mode
             random.setcol()
             print(random.choice(responses))
         error_title.setcol()
         print("Error:")
         error_desc.setcol()
-        print("MT String (try to say it)")
+        print("MT String (try to say it)") #returning the error
         toolset.defaultcol()
-    elif handler[0] == "/" and not (platform.system() == "Linux"):
+    elif handler[0] == "/" and not (platform.system() == "Linux"):  #making shure the path is not misspelled or smth
         handler = "." + handler
         handler = handler.split("/")
         handler.reverse()
@@ -67,7 +67,7 @@ def handler(handler, silence=False):
         print(file, flush=True)
         return file
         pass
-    elif handler[1] == ":":
+    elif handler[1] == ":" and platform.system() == "Windows":   #checking if the handler is on a different filesystem under windowss
         handler = handler.split("/")
         handler.reverse()
         path = handler
@@ -120,7 +120,7 @@ def handler(handler, silence=False):
         file = toolset.combine(file, ".")
         #print(file, flush=True)
         return file
-    else:
+    else: #the handler is most likely in the own folder
         sys.path.insert(1, "./")
         handler = handler.split(".")
         handler.reverse()

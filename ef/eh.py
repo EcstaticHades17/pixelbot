@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #eh.py
-# a example for a header. Useless and only for testing
+# a example for a handler. Useless and only for testing
 def connect():
     print("")
 
@@ -10,11 +10,8 @@ def getcountdown():
     return 0.125
 
 def send(x, y, r, g, b):
-    print(x)
-    print(y)
-    print(r)
-    print(g)
-    print(b)
+    print((x, y))
+    print(f"RGB({r}, {g}, {b})")
 
 def check(x, y, r, g, b):
     return True
