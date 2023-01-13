@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #gimmedahandler.py
-import random
+import random as rndm
 import sys
 import toolset
 import platform
@@ -43,7 +43,7 @@ def handler(handler, silence=False):
         ]
         if not silence:  #checking if in silent mode
             random.setcol()
-            print(random.choice(responses))
+            print(rndm.choice(responses))
         error_title.setcol()
         print("Error:")
         error_desc.setcol()
